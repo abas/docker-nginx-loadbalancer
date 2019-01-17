@@ -1,0 +1,25 @@
+version: "3"
+
+networks:
+  dev_net: 
+    external:
+      name: dev # run : docker network create dev
+
+services:
+# Web Server Container
+  dev_lb:
+    restart: 
+    image: kankuu/nginx-loadbalancer:alpha
+    container_name: dev-lb
+    working_dir: /etc/nginx/
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./conf.d:/etc/nginx/conf.d
+      - ./nginx_log:/var/log/nginx
+      - ./report:/usr/share/nginx/html
+      - ./pass:/etc/nginx/pass
+    networks:
+      - dev_net
