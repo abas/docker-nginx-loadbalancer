@@ -8,7 +8,7 @@ networks:
 services:
 # Web Server Container
   dev_lb:
-    restart: 
+    restart: always
     image: kankuu/nginx-loadbalancer:alpha
     container_name: dev-lb
     working_dir: /etc/nginx/
